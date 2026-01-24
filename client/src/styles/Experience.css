@@ -1,0 +1,139 @@
+.experience {
+  padding: 4rem 0;
+  background: linear-gradient(180deg, rgba(236, 72, 153, 0.05), transparent);
+}
+
+.experience .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.experience h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.experience-timeline {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.experience-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+  opacity: 0.3;
+}
+
+@media (max-width: 768px) {
+  .experience-timeline::before {
+    left: -1rem;
+  }
+}
+
+.experience-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+  position: relative;
+  transition: var(--transition);
+}
+
+.experience-item::before {
+  content: '';
+  position: absolute;
+  left: -2.5rem;
+  top: 2.5rem;
+  width: 12px;
+  height: 12px;
+  background: var(--primary-color);
+  border: 3px solid var(--dark-bg);
+  border-radius: 50%;
+  box-shadow: 0 0 0 8px rgba(99, 102, 241, 0.1);
+}
+
+.experience-item:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15);
+  transform: translateX(10px);
+}
+
+.experience-header {
+  margin-bottom: 1rem;
+}
+
+.experience-header h3 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.company {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-right: 1rem;
+}
+
+.duration {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.description {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-badge {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary-color);
+  border-radius: 6px;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+@media (max-width: 768px) {
+  .experience h2 {
+    font-size: 1.8rem;
+  }
+
+  .experience-item {
+    margin-left: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .experience-item::before {
+    left: -2rem;
+  }
+
+  .experience-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .company {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+}
