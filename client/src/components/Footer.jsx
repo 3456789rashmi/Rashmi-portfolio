@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="footer-content">
           <p>&copy; 2026 Rashmi Sharma. All rights reserved.</p>
           <div className="social-links">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/3456789rashmi/" target="_blank" rel="noopener noreferrer">
               <FaGithub />
             </a>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">

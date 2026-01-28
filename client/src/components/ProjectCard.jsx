@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import '../styles/ProjectCard.css';
 
-const ProjectCard = ({ project }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
+const ProjectCard = ({ project, isActive = false }) => {
   return (
     <motion.div
       className="project-card"
-      whileHover={{ y: -10 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
     >
       <div className="project-image">
+        <div className="image-effect"></div>
         <img src={project.image} alt={project.title} />
       </div>
       <div className="project-content">

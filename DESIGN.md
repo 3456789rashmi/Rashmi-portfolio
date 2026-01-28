@@ -6,16 +6,19 @@ This portfolio follows modern web design best practices with:
 
 ### Color Palette
 
-- **Primary**: Indigo (#6366f1) - Main interactive elements
-- **Secondary**: Pink (#ec4899) - Accent color
-- **Dark Background**: Navy (#0f172a) - Main background
-- **Card Background**: Slate (#1e293b) - Component backgrounds
-- **Text Primary**: Off-white (#f8fafc) - Main text
-- **Text Secondary**: Light Gray (#cbd5e1) - Secondary text
+- **Primary**: Emerald (#10b981) - Trust & Growth
+- **Primary Light**: Light Emerald (#34d399) - Highlights
+- **Secondary**: Teal (#14b8a6) - Sophisticated accent
+- **Accent**: Warm Amber (#f59e0b) - Premium highlights
+- **Dark Background**: Deep Space Navy (#0a0e1a) - Main background
+- **Card Background**: Deep Blue (#151d32) - Component backgrounds
+- **Text Primary**: Clean White (#f1f5f9) - Main text
+- **Text Secondary**: Soft Gray (#94a3b8) - Secondary text
+- **Text Muted**: Muted Gray (#64748b) - Tertiary text
 
 ### Typography
 
-- **Font Family**: Segoe UI, System fonts for optimal readability
+- **Font Family**: Inter, System fonts for optimal readability
 - **Headings**: Bold, gradient text with modern flair
 - **Body**: Clean, readable sans-serif with good contrast
 

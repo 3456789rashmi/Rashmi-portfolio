@@ -28,6 +28,11 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="nav-item">
+            <Link to="/dsa" className="nav-links" onClick={handleClick}>
+              DSA
+            </Link>
+          </li>
+          <li className="nav-item">
             <Link to="/contact" className="nav-links" onClick={handleClick}>
               Contact
             </Link>

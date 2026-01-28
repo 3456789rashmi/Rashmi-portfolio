@@ -72,7 +72,7 @@ const Hero = () => {
           </motion.div>
 
           <motion.div variants={itemVariants} className="hero-social">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://github.com/3456789rashmi/" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
           </motion.div>
@@ -86,6 +86,32 @@ const Hero = () => {
           animate="visible"
         >
           <div className="hero-image-container">
+            {/* Orbiting Elements */}
+            <div className="orbit orbit-1"></div>
+            <div className="orbit orbit-2"></div>
+            <div className="orbit orbit-3"></div>
+
+            {/* Floating Tech Elements */}
+            <div className="floating-element element-1">
+              <div className="element-dot"></div>
+            </div>
+            <div className="floating-element element-2">
+              <div className="element-dot"></div>
+            </div>
+            <div className="floating-element element-3">
+              <div className="element-dot"></div>
+            </div>
+            <div className="floating-element element-4">
+              <div className="element-dot"></div>
+            </div>
+            <div className="floating-element element-5">
+              <div className="element-dot"></div>
+            </div>
+            <div className="floating-element element-6">
+              <div className="element-dot"></div>
+            </div>
+
+            {/* Profile Image */}
             <img src={profileImg} alt="Rashmi Sharma" className="hero-profile-img" />
             <div className="image-blur"></div>
           </div>
