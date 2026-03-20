@@ -1,127 +1,152 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { SiLeetcode } from 'react-icons/si';
 import '../styles/Hero.css';
-import profileImg from '../assets/Rashmi.jpeg';
+import Mycv from '../assets/Mycv.pdf';
 
 const Hero = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
+  const [currentRole, setCurrentRole] = useState(0);
+  
+  const roles = [
+    "Creative Full Stack Web Developer",
+    "Enthusiastic Developer",
+    "Senior Executive of Spark"
+  ];
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentRole((prev) => (prev + 1) % roles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
-  const imageVariants = {
-    hidden: { opacity: 0, x: 100, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
+  const handleCopyCode = () => {
+    const code = `class RashmiSharma {
+  constructor() {
+    this.name = "Rashmi Sharma";
+    this.role = "Full Stack Developer";
+    this.skills = ["React", "Node.js"];
+  }
+}`;
+    navigator.clipboard.writeText(code);
+    alert('Code copied to clipboard!');
   };
 
   return (
-    <section className="hero">
+    <section className="hero" id="hero">
       <div className="hero-container">
-        {/* Text Content - Left Side */}
-        <motion.div
-          className="hero-content"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.h1 variants={itemVariants} className="hero-title">
-            Hi, I'm<br />
+        {/* Left Side - Text Content */}
+        <div className="hero-content">
+          <h1 className="hero-title">
+            Hello, I'm <br />
             <span className="highlight">Rashmi Sharma</span>
-          </motion.h1>
-
-          <motion.p variants={itemVariants} className="hero-subtitle">
-            Full Stack Enthusiast (MERN)
-          </motion.p>
-
-          <motion.div variants={itemVariants} className="hero-description">
-            <p>
-              Passionate about building scalable web applications using MongoDB, Express, React, and Node.js. 
-              A dedicated public speaker and Senior Executive at Club Spark, committed to fostering innovation in the tech community.
+          </h1>
+          
+          <div className="hero-role-box">
+            <p className="hero-role animate-role">
+              {roles[currentRole]}
             </p>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="hero-buttons">
-            <button className="btn btn-primary">View My Work</button>
-            <button className="btn btn-secondary">Get In Touch</button>
-          </motion.div>
-
-          <motion.div variants={itemVariants} className="hero-social">
-            <a href="https://github.com/3456789rashmi/" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
-          </motion.div>
-        </motion.div>
-
-        {/* Image Content - Right Side */}
-        <motion.div
-          className="hero-image-wrapper"
-          variants={imageVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <div className="hero-image-container">
-            {/* Orbiting Elements */}
-            <div className="orbit orbit-1"></div>
-            <div className="orbit orbit-2"></div>
-            <div className="orbit orbit-3"></div>
-
-            {/* Floating Tech Elements */}
-            <div className="floating-element element-1">
-              <div className="element-dot"></div>
-            </div>
-            <div className="floating-element element-2">
-              <div className="element-dot"></div>
-            </div>
-            <div className="floating-element element-3">
-              <div className="element-dot"></div>
-            </div>
-            <div className="floating-element element-4">
-              <div className="element-dot"></div>
-            </div>
-            <div className="floating-element element-5">
-              <div className="element-dot"></div>
-            </div>
-            <div className="floating-element element-6">
-              <div className="element-dot"></div>
-            </div>
-
-            {/* Profile Image */}
-            <img src={profileImg} alt="Rashmi Sharma" className="hero-profile-img" />
-            <div className="image-blur"></div>
           </div>
-        </motion.div>
-      </div>
 
-      {/* Animated Background Blobs */}
-      <div className="hero-background">
-        <div className="gradient-blob blob-1"></div>
-        <div className="gradient-blob blob-2"></div>
+          {/* Resume Download */}
+          <div className="hero-cta">
+            <a href={Mycv} download="Rashmi_Sharma_CV.pdf" className="btn btn-primary">
+              Download Resume
+            </a>
+          </div>
+
+          {/* Social Links */}
+          <div className="hero-socials">
+            <a 
+              href="https://github.com/3456789rashmi/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-icon"
+              title="GitHub"
+            >
+              <FaGithub />
+            </a>
+            <a 
+              href="https://linkedin.com/in/rashmi-sharma" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-icon"
+              title="LinkedIn"
+            >
+              <FaLinkedin />
+            </a>
+            <a 
+              href="https://leetcode.com/rashmi_sharma" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-icon"
+              title="LeetCode"
+            >
+              <SiLeetcode />
+            </a>
+            <a 
+              href="mailto:sharmarashmi28605@gmail.com"
+              className="social-icon"
+              title="Gmail"
+            >
+              <FaEnvelope />
+            </a>
+          </div>
+        </div>
+
+        {/* Right Side - Code Snippet */}
+        <div className="hero-code-wrapper">
+          <div className="code-snippet">
+            <div className="code-header">
+              <span className="code-title">RashmiSharma.jsx</span>
+              <button 
+                className="copy-btn" 
+                onClick={handleCopyCode}
+                title="Copy code"
+              >
+                📋
+              </button>
+            </div>
+            <div className="code-content">
+              <div className="code-line">
+                <span className="keyword">class</span> 
+                <span className="class-name">RashmiSharma</span> 
+                <span className="punctuation">{' {'}</span>
+              </div>
+              <div className="code-line indent-1">
+                <span className="keyword">constructor</span>
+                <span className="punctuation">() {'{'}</span>
+              </div>
+              <div className="code-line indent-2">
+                <span className="property">this.name</span>
+                <span className="operator">=</span>
+                <span className="string">"Rashmi Sharma"</span>
+                <span className="punctuation">;</span>
+              </div>
+              <div className="code-line indent-2">
+                <span className="property">this.role</span>
+                <span className="operator">=</span>
+                <span className="string">"Full Stack Developer"</span>
+                <span className="punctuation">;</span>
+              </div>
+              <div className="code-line indent-2">
+                <span className="property">this.skills</span>
+                <span className="operator">=</span>
+                <span className="punctuation">[</span>
+                <span className="string">"React"</span>
+                <span className="punctuation">,</span>
+                <span className="string">"Node.js"</span>
+                <span className="punctuation">];</span>
+              </div>
+              <div className="code-line indent-1">
+                <span className="punctuation">{'}'}</span>
+              </div>
+              <div className="code-line">
+                <span className="punctuation">{'}'}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

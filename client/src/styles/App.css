@@ -2,8 +2,15 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--dark-bg);
+  transition: background-color 0.5s ease;
 }
 
 main {
   flex: 1;
+}
+
+html {
+  background-color: var(--dark-bg);
+  transition: background-color 0.5s ease;
 }

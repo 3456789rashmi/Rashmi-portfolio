@@ -1,48 +1,76 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { 
+  SiReact, SiJavascript, SiHtml5, SiCss3,
+  SiTailwindcss, SiNodedotjs, SiExpress, SiPhp,
+  SiMongodb, SiPostgresql, SiMysql,
+  SiGit, SiGithub, SiDocker
+} from 'react-icons/si';
 import '../styles/Skills.css';
-import { FaReact, FaNode, FaPython, FaDatabase, FaGitAlt } from 'react-icons/fa';
 
 const Skills = () => {
-  const skills = [
-    { name: 'React', icon: <FaReact />, level: 90 },
-    { name: 'Node.js', icon: <FaNode />, level: 85 },
-    { name: 'Python', icon: <FaPython />, level: 80 },
-    { name: 'MongoDB', icon: <FaDatabase />, level: 85 },
-    { name: 'Git', icon: <FaGitAlt />, level: 95 },
+  const skillCategories = [
+    {
+      title: 'FRONTEND',
+      skills: [
+        { name: 'React', icon: SiReact, color: '#61dafb' },
+        { name: 'JavaScript', icon: SiJavascript, color: '#f7df1e' },
+        { name: 'HTML', icon: SiHtml5, color: '#e34c26' },
+        { name: 'CSS', icon: SiCss3, color: '#264de4' },
+        { name: 'Tailwind', icon: SiTailwindcss, color: '#06b6d4' },
+      ]
+    },
+    {
+      title: 'BACKEND',
+      skills: [
+        { name: 'Node.js', icon: SiNodedotjs, color: '#68a063' },
+        { name: 'Express', icon: SiExpress, color: '#90c53f' },
+        { name: 'PHP', icon: SiPhp, color: '#777bb4' },
+      ]
+    },
+    {
+      title: 'DATABASE',
+      skills: [
+        { name: 'MongoDB', icon: SiMongodb, color: '#13aa52' },
+        { name: 'PostgreSQL', icon: SiPostgresql, color: '#336791' },
+        { name: 'MySQL', icon: SiMysql, color: '#00758f' },
+      ]
+    },
+    {
+      title: 'TOOLS & DEVOPS',
+      skills: [
+        { name: 'Git', icon: SiGit, color: '#f1502f' },
+        { name: 'GitHub', icon: SiGithub, color: '#333333' },
+        { name: 'Docker', icon: SiDocker, color: '#2496ed' },
+      ]
+    }
   ];
 
   return (
-    <section className="skills">
-      <div className="container">
-        <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-          Skills & Expertise
-        </motion.h2>
-        <div className="skills-grid">
-          {skills.map((skill, index) => (
-            <motion.div
-              key={index}
-              className="skill-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <div className="skill-icon">{skill.icon}</div>
-              <h3>{skill.name}</h3>
-              <div className="skill-bar">
-                <motion.div
-                  className="skill-fill"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1, delay: 0.3 }}
-                  viewport={{ once: true }}
-                ></motion.div>
-              </div>
-              <span className="skill-level">{skill.level}%</span>
-            </motion.div>
-          ))}
-        </div>
+    <section id="skills" className="skills">
+      <div className="skills-container">
+        <h2 className="skills-title">My Skillsets</h2>
+        
+        {skillCategories.map((category, categoryIndex) => (
+          <div key={categoryIndex} className="skill-category">
+            <h3 className="category-title">{category.title}</h3>
+            <div className="skills-grid">
+              {category.skills.map((skill, skillIndex) => {
+                const Icon = skill.icon;
+                return (
+                  <div key={skillIndex} className="skill-card">
+                    <div className="skill-icon">
+                      <Icon style={{ fontSize: '3rem', color: skill.color }} />
+                    </div>
+                    <p className="skill-name">{skill.name}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+
+        {/* Permanent geometric element */}
+        <div className="skills-decoration"></div>
       </div>
     </section>
   );

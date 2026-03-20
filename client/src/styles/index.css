@@ -7,19 +7,19 @@
 }
 
 :root {
-  /* Modern Purple & Cyan Color Palette */
-  --primary-color: #a855f7;          /* Purple - main accent */
-  --primary-light: #c084fc;          /* Lighter purple */
-  --primary-dark: #7c3aed;           /* Darker purple */
-  --secondary-color: #06b6d4;        /* Cyan - accent */
-  --accent-color: #ec4899;           /* Pink - highlights */
-  --accent-light: #f472b6;           /* Lighter pink */
+  /* Modern Dark & Blue Color Palette */
+  --primary-color: #3b82f6;          /* Blue - main accent */
+  --primary-light: #60a5fa;          /* Lighter blue */
+  --primary-dark: #1e40af;           /* Darker blue */
+  --secondary-color: #5b9af7;        /* Lighter blue - accent */
+  --accent-color: #2563eb;           /* Darker blue - highlights */
+  --accent-light: #60a5fa;           /* Lighter blue */
   
   /* Background Colors */
-  --dark-bg: #0f0a1a;                /* Deep dark purple-navy */
-  --dark-bg-secondary: #1a1025;      /* Slightly lighter purple-navy */
-  --card-bg: #1a1230;                /* Card background - dark purple */
-  --card-bg-hover: #241540;          /* Card hover state - slightly brighter purple */
+  --dark-bg: #0a0f1e;                /* Very dark navy-black */
+  --dark-bg-secondary: #10141f;      /* Slightly lighter navy-black */
+  --card-bg: #1a1f2e;                /* Card background - dark navy */
+  --card-bg-hover: #242d3d;          /* Card hover state - slightly brighter navy */
   
   /* Text Colors */
   --text-primary: #f1f5f9;           /* Clean white */
@@ -27,10 +27,10 @@
   --text-muted: #64748b;             /* Muted gray */
   
   /* Border & Effects */
-  --border-color: #3a2d5a;           /* Subtle purple-tinted border */
-  --border-glow: rgba(168, 85, 247, 0.3);
-  --glass-bg: rgba(26, 18, 48, 0.7);
-  --glass-border: rgba(168, 85, 247, 0.15);
+  --border-color: #2a3550;           /* Subtle blue-tinted border */
+  --border-glow: rgba(59, 130, 246, 0.3);
+  --glass-bg: rgba(10, 15, 30, 0.7);
+  --glass-border: rgba(59, 130, 246, 0.15);
   
   /* Status Colors */
   --success-color: #22c55e;
@@ -48,6 +48,38 @@
   --shadow-glow: 0 0 40px rgba(16, 185, 129, 0.15);
 }
 
+/* Light Theme */
+[data-theme="light"] {
+  --primary-color: #2563eb;          /* Darker blue for light mode */
+  --primary-light: #3b82f6;          /* Regular blue */
+  --primary-dark: #1e40af;           /* Keep dark blue */
+  --secondary-color: #0284c7;        /* Darker cyan */
+  --accent-color: #1e40af;           /* Darker blue */
+  --accent-light: #3b82f6;           /* Light blue */
+  
+  /* Background Colors - Light */
+  --dark-bg: #f8fafc;                /* Very light gray-blue */
+  --dark-bg-secondary: #f1f5f9;      /* Slightly darker light gray */
+  --card-bg: #ffffff;                /* White card background */
+  --card-bg-hover: #f0f4f8;          /* Light hover state */
+  
+  /* Text Colors - Light */
+  --text-primary: #0f172a;           /* Nearly black */
+  --text-secondary: #475569;         /* Dark gray */
+  --text-muted: #64748b;             /* Medium gray */
+  
+  /* Border & Effects - Light */
+  --border-color: #cbd5e1;           /* Light border */
+  --border-glow: rgba(37, 99, 235, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(37, 99, 235, 0.2);
+  
+  /* Shadows - Light */
+  --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 25px 50px -12px rgba(15, 23, 42, 0.15);
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--dark-bg);
@@ -55,9 +87,11 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
 }
 
-/* Subtle background pattern */
+/* Subtle background pattern - Dark Theme */
 body::before {
   content: '';
   position: fixed;
@@ -66,11 +100,20 @@ body::before {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(ellipse at 20% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(20, 184, 166, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(245, 158, 11, 0.03) 0%, transparent 70%);
+    radial-gradient(ellipse at 20% 0%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
   pointer-events: none;
   z-index: -1;
+  transition: background 0.5s ease;
+}
+
+/* Light theme background pattern */
+html[data-theme="light"] body::before {
+  background: 
+    radial-gradient(ellipse at 20% 0%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
 }
 
 html {
@@ -117,11 +160,11 @@ button {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: var(--dark-bg);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: white;
   font-weight: 700;
   box-shadow: 
-    0 10px 30px rgba(16, 185, 129, 0.25),
+    0 10px 30px rgba(59, 130, 246, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
@@ -139,7 +182,7 @@ button {
 .btn-primary:hover {
   transform: translateY(-3px);
   box-shadow: 
-    0 20px 40px rgba(16, 185, 129, 0.35),
+    0 20px 40px rgba(59, 130, 246, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
@@ -156,8 +199,8 @@ button {
 
 .btn-secondary:hover {
   background: var(--primary-color);
-  color: var(--dark-bg);
-  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+  color: white;
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
 }
 
 .btn-link {
@@ -166,13 +209,13 @@ button {
   padding: 10px 18px;
   border-radius: 8px;
   transition: var(--transition);
-  background: rgba(16, 185, 129, 0.08);
+  background: rgba(59, 130, 246, 0.08);
   border: 1px solid transparent;
 }
 
 .btn-link:hover {
-  background: rgba(16, 185, 129, 0.15);
-  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
   color: var(--primary-light);
   transform: translateY(-2px);
 }
