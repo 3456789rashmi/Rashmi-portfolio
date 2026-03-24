@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
 import logo from '../assets/logo.png';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
-  const [theme, setTheme] = useState('dark'); // 'dark' or 'light'
+  const [theme, setTheme] = useState('light'); // 'dark' or 'light'
+
+  // Set light theme as default on component mount
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }, []);
 
   const handleClick = () => setClick(!click);
 
@@ -55,6 +60,11 @@ const Navbar = () => {
           <li className="nav-item">
             <button className="nav-links" onClick={() => scrollToSection('projects')}>
               projects
+            </button>
+          </li>
+          <li className="nav-item">
+            <button className="nav-links" onClick={() => scrollToSection('achievements')}>
+              achievements
             </button>
           </li>
           <li className="nav-item">

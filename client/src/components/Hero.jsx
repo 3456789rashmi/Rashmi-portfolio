@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
+import gsap from 'gsap';
 import '../styles/Hero.css';
 import Mycv from '../assets/Mycv.pdf';
 
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
+  const cardRef = useRef(null);
+  const nameRef = useRef(null);
   
   const roles = [
     "Creative Full Stack Web Developer",
@@ -18,6 +21,74 @@ const Hero = () => {
       setCurrentRole((prev) => (prev + 1) % roles.length);
     }, 3000);
     return () => clearInterval(interval);
+  }, []);
+
+  // 3D Name Reveal Animation
+  useEffect(() => {
+    if (nameRef.current) {
+      // Reset initial state
+      gsap.set(nameRef.current, {
+        opacity: 0.3,
+        z: -150,
+        filter: "blur(8px)"
+      });
+
+      // Animate to final state
+      gsap.to(nameRef.current, {
+        opacity: 1,
+        z: 0,
+        filter: "blur(0px)",
+        duration: 1.4,
+        ease: "power3.out",
+        delay: 0.2
+      });
+    }
+  }, []);
+
+  // 3D Card Load Animation with full rotation
+  useEffect(() => {
+    if (cardRef.current) {
+      // Add rotating class for the initial animation
+      cardRef.current.classList.add('rotating');
+      
+      // After rotation completes, add loaded class for smooth mouse tracking
+      const timeout = setTimeout(() => {
+        if (cardRef.current) {
+          cardRef.current.classList.remove('rotating');
+          cardRef.current.classList.add('loaded');
+        }
+      }, 1500); // Match animation duration
+      
+      return () => clearTimeout(timeout);
+    }
+  }, []);
+
+  // Mouse tracking for 3D effect
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!cardRef.current) return;
+
+      const card = cardRef.current;
+      const x = (window.innerWidth / 2 - e.clientX) / 25;
+      const y = (window.innerHeight / 2 - e.clientY) / 25;
+
+      card.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${y}deg)`;
+    };
+
+    const handleMouseLeave = () => {
+      if (cardRef.current) {
+        cardRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+        cardRef.current.classList.add('loaded');
+      }
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
   }, []);
 
   const handleCopyCode = () => {
@@ -39,7 +110,7 @@ const Hero = () => {
         <div className="hero-content">
           <h1 className="hero-title">
             Hello, I'm <br />
-            <span className="highlight">Rashmi Sharma</span>
+            <span className="highlight" ref={nameRef}>Rashmi Sharma</span>
           </h1>
           
           <div className="hero-role-box">
@@ -96,7 +167,7 @@ const Hero = () => {
 
         {/* Right Side - Code Snippet */}
         <div className="hero-code-wrapper">
-          <div className="code-snippet">
+          <div className="code-snippet" ref={cardRef}>
             <div className="code-header">
               <span className="code-title">RashmiSharma.jsx</span>
               <button 

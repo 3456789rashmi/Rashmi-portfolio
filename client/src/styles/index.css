@@ -23,8 +23,8 @@
   
   /* Text Colors */
   --text-primary: #f1f5f9;           /* Clean white */
-  --text-secondary: #94a3b8;         /* Soft gray */
-  --text-muted: #64748b;             /* Muted gray */
+  --text-secondary: #000000;         /* Soft gray */
+  --text-muted: #000000;             /* Muted gray */
   
   /* Border & Effects */
   --border-color: #2a3550;           /* Subtle blue-tinted border */
@@ -65,8 +65,8 @@
   
   /* Text Colors - Light */
   --text-primary: #0f172a;           /* Nearly black */
-  --text-secondary: #475569;         /* Dark gray */
-  --text-muted: #64748b;             /* Medium gray */
+  --text-secondary: #000000;         /* Dark gray */
+  --text-muted: #000000;             /* Medium gray */
   
   /* Border & Effects - Light */
   --border-color: #cbd5e1;           /* Light border */

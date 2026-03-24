@@ -82,7 +82,7 @@ html[data-theme="light"] .about::after {
 
 /* Text Section */
 .about-text {
-  color: #cbd5e1;
+  color: #000000;
 }
 
 .about-text h2 {
@@ -100,14 +100,14 @@ html[data-theme="light"] .about::after {
   font-size: 1.05rem;
   line-height: 1.8;
   margin-bottom: 1.25rem;
-  color: #94a3b8;
+  color: #000000;
   letter-spacing: 0.005em;
 }
 
 .about-text p:first-of-type {
   font-size: 1.1rem;
   font-weight: 500;
-  color: #cbd5e1;
+  color: #000000;
 }
 
 /* Testimonials Section */
@@ -190,7 +190,7 @@ html[data-theme="light"] .testimonial-card:hover {
 .testimonial-quote {
   font-size: 1.05rem;
   line-height: 1.7;
-  color: #94a3b8;
+  color: #000000;
   margin-bottom: 1.5rem;
   font-weight: 500;
   letter-spacing: 0.005em;

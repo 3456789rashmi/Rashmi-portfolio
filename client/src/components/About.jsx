@@ -5,15 +5,12 @@ const About = () => {
   const testimonials = [
     {
       quote: "I don't chase perfection. I build, break, learn, and build again.",
-      author: "- Rashmi Sharma"
     },
     {
       quote: "I know I'm not successful enough, but I'm passionate enough not to worry about success.",
-      author: "- Rashmi Sharma"
     },
     {
       quote: "Most of my learning happened after pressing the 'run' button.",
-      author: "- Rashmi Sharma"
     }
   ];
 
@@ -51,7 +48,7 @@ const About = () => {
             {testimonials.map((testimonial, index) => (
               <div key={index} className="testimonial-card">
                 <p className="testimonial-quote">{testimonial.quote}</p>
-                <p className="testimonial-author">{testimonial.author}</p>
+                {/* <p className="testimonial-author">{testimonial.author}</p> */}
               </div>
             ))}
           </div>
