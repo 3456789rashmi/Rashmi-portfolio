@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 import gsap from 'gsap';
@@ -12,11 +12,11 @@ const Hero = () => {
   const cardRef = useRef(null);
   const nameRef = useRef(null);
   
-  const roles = [
+  const roles = useMemo(() => [
     "Creative Full Stack Web Developer",
     "Enthusiastic Developer",
     "Senior Executive of Spark"
-  ];
+  ], []);
 
   useEffect(() => {
     const interval = setInterval(() => {
