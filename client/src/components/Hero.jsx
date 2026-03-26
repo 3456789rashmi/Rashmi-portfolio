@@ -10,10 +10,13 @@ import RashmiImage from '../assets/Rashmi.jpeg';
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const [scrollTilt, setScrollTilt] = useState({ x: 0, y: 0 });
   const [particles, setParticles] = useState([]);
   const cardRef = useRef(null);
   const nameRef = useRef(null);
+  const autoExpandTimerRef = useRef(null);
+  const autoCollapseTimerRef = useRef(null);
   
   const roles = useMemo(() => [
     "Creative Full Stack Web Developer",
@@ -134,6 +137,35 @@ const Hero = () => {
     }
   }, [isExpanded]);
 
+  // Auto-transform card: expand after 5 seconds if not hovering, collapse after 2 seconds if auto-expanded
+  useEffect(() => {
+    // If hovering, clear any timers
+    if (isHovering) {
+      if (autoExpandTimerRef.current) clearTimeout(autoExpandTimerRef.current);
+      if (autoCollapseTimerRef.current) clearTimeout(autoCollapseTimerRef.current);
+      return;
+    }
+
+    // If not hovering and not expanded, set timer to auto-expand after 5 seconds
+    if (!isExpanded && !isHovering) {
+      autoExpandTimerRef.current = setTimeout(() => {
+        setIsExpanded(true);
+      }, 5000);
+    }
+
+    // If expanded (either manually or auto), set timer to auto-collapse after 2 seconds
+    if (isExpanded && !isHovering) {
+      autoCollapseTimerRef.current = setTimeout(() => {
+        setIsExpanded(false);
+      }, 2000);
+    }
+
+    return () => {
+      if (autoExpandTimerRef.current) clearTimeout(autoExpandTimerRef.current);
+      if (autoCollapseTimerRef.current) clearTimeout(autoCollapseTimerRef.current);
+    };
+  }, [isExpanded, isHovering]);
+
   const handleCopyCode = () => {
     const code = `class RashmiSharma {
   constructor() {
@@ -214,8 +246,14 @@ const Hero = () => {
           <div 
             className={`code-snippet ${isExpanded ? 'expanded' : ''}`}
             ref={cardRef}
-            onMouseEnter={() => setIsExpanded(true)}
-            onMouseLeave={() => setIsExpanded(false)}
+            onMouseEnter={() => {
+              setIsHovering(true);
+              setIsExpanded(true);
+            }}
+            onMouseLeave={() => {
+              setIsHovering(false);
+              setIsExpanded(false);
+            }}
           >
             {!isExpanded ? (
               <>
@@ -285,7 +323,10 @@ const Hero = () => {
                     }}
                   />
                 ))}
-                <div className="profile-image-wrapper" onClick={() => setIsExpanded(false)}>
+                <div className="profile-image-wrapper" onClick={() => {
+                  setIsExpanded(false);
+                  setIsHovering(false);
+                }}>
                   <img src={RashmiImage} alt="Rashmi Sharma" className="profile-image-card" />
                 </div>
               </div>
