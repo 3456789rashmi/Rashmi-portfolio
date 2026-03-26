@@ -23,7 +23,7 @@ const Hero = () => {
       setCurrentRole((prev) => (prev + 1) % roles.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [roles]);
 
   // 3D Name Reveal Animation
   useEffect(() => {

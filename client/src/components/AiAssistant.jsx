@@ -20,7 +20,7 @@ const AiAssistant = () => {
     if (isOpen && messages.length === 0) {
       showWelcomeMessage();
     }
-  }, [isOpen]);
+  }, [isOpen, messages]);
 
   const showWelcomeMessage = () => {
     const greeting = `Hi! 👋 I'm your personal AI companion. I can tell you everything about ${YOUR_NAME} — education, background, full-stack skills, leadership, chatbots, real-time websites, and projects.
