@@ -8,6 +8,10 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "public": true,
+  "env": {
+    "REACT_APP_ENVIRONMENT": "production"
+  }
 }
 

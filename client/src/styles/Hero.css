@@ -829,12 +829,40 @@ html[data-theme="light"] .punctuation {
   .hero-title {
     font-size: 2.8rem;
   }
+
+  .hero::before {
+    border-left: 300px solid #3b82f6;
+    border-top: 400px solid transparent;
+    border-bottom: 400px solid transparent;
+  }
+
+  .hero::after {
+    border-right: 300px solid #3b82f6;
+    border-top: 400px solid transparent;
+    border-bottom: 400px solid transparent;
+  }
+
+  .profile-image-wrapper {
+    width: 280px;
+    height: 280px;
+  }
+
+  .profile-image-card {
+    width: 280px;
+    height: 280px;
+  }
+
+  .code-snippet.expanded {
+    width: 280px;
+    height: 280px;
+  }
 }
 
 @media (max-width: 768px) {
   .hero {
     padding: 6rem 1.5rem 3rem;
     min-height: auto;
+    scroll-margin-top: 60px;
   }
 
   .hero-container {
@@ -849,10 +877,23 @@ html[data-theme="light"] .punctuation {
     font-size: 1.2rem;
   }
 
+  .hero::before {
+    border-left: 200px solid #3b82f6;
+    border-top: 300px solid transparent;
+    border-bottom: 300px solid transparent;
+  }
+
+  .hero::after {
+    border-right: 200px solid #3b82f6;
+    border-top: 300px solid transparent;
+    border-bottom: 300px solid transparent;
+  }
+
   .code-snippet {
     padding: 1.2rem;
     font-size: 0.75rem;
     min-height: auto;
+    max-width: 100%;
   }
 
   .code-line {
@@ -866,32 +907,136 @@ html[data-theme="light"] .punctuation {
   .code-line.indent-2 {
     margin-left: 3rem;
   }
+
+  .profile-image-wrapper {
+    width: 240px;
+    height: 240px;
+  }
+
+  .profile-image-card {
+    width: 240px;
+    height: 240px;
+  }
+
+  .code-snippet.expanded {
+    width: 240px;
+    height: 240px;
+  }
+
+  .hero-role-box {
+    padding: 0.8rem 1.2rem;
+  }
+
+  .hero-role {
+    font-size: 1.1rem;
+  }
+
+  .details-title {
+    font-size: 1.1rem;
+  }
+
+  .details-text {
+    font-size: 0.75rem;
+  }
+
+  .details-list li {
+    font-size: 0.7rem;
+  }
 }
 
 @media (max-width: 480px) {
   .hero {
     padding: 5rem 1rem 2rem;
+    scroll-margin-top: 50px;
+  }
+
+  .hero-container {
+    gap: 1rem;
   }
 
   .hero-title {
     font-size: 1.8rem;
+    line-height: 1.1;
   }
 
   .hero-subtitle {
     font-size: 1rem;
   }
 
+  .hero::before {
+    border-left: 150px solid #3b82f6;
+    border-top: 200px solid transparent;
+    border-bottom: 200px solid transparent;
+    opacity: 0.08;
+  }
+
+  .hero::after {
+    border-right: 150px solid #3b82f6;
+    border-top: 200px solid transparent;
+    border-bottom: 200px solid transparent;
+    opacity: 0.08;
+  }
+
   .code-snippet {
-    padding: 1.25rem;
-    font-size: 0.75rem;
+    padding: 1rem;
+    font-size: 0.7rem;
+    max-width: 100%;
+    min-height: 140px;
+  }
+
+  .code-snippet.expanded {
+    width: 200px;
+    height: 200px;
+  }
+
+  .profile-image-wrapper {
+    width: 200px;
+    height: 200px;
+  }
+
+  .profile-image-card {
+    width: 200px;
+    height: 200px;
   }
 
   .hero-socials {
     gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .social-icon {
     width: 40px;
     height: 40px;
+    font-size: 1.1rem;
+  }
+
+  .hero-role-box {
+    padding: 0.7rem 1rem;
+  }
+
+  .hero-role {
+    font-size: 1rem;
+    min-height: 1.5rem;
+  }
+
+  .card-details {
+    padding: 15px;
+  }
+
+  .details-title {
+    font-size: 0.95rem;
+  }
+
+  .details-text {
+    font-size: 0.7rem;
+  }
+
+  .details-section h4 {
+    font-size: 0.8rem;
+  }
+
+  .details-list li {
+    font-size: 0.65rem;
+    padding-left: 0.8rem;
   }
 }
