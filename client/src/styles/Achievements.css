@@ -184,39 +184,53 @@ html[data-theme="light"] .header-badge {
 }
 
 .header-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.8rem, 7vw, 4.5rem);
-  font-weight: 900;
-  color: #f1f5f9;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   line-height: 1.1;
   margin-bottom: 1rem;
-  letter-spacing: -0.02em;
   animation: title-in 0.9s ease 0.2s both;
-  transition: color 0.5s ease;
+  transition: all 0.5s ease;
   perspective: 1200px;
 }
 
+html[data-theme="dark"] .header-title {
+  color: #ffffff;
+  background: none;
+  -webkit-text-fill-color: unset;
+}
+
 html[data-theme="light"] .header-title {
-  color: #0f172a;
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .header-title .hl {
-  color: #3b82f6;
-  font-style: italic;
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-style: normal;
   position: relative;
   display: inline-block;
-  transition: color 0.5s ease;
+  transition: all 0.5s ease;
   transform-style: preserve-3d;
   will-change: transform;
-  text-shadow: 
-    0 0 30px rgba(80, 150, 255, 0.6),
-    0 0 50px rgba(59, 130, 246, 0.4),
-    0 0 80px rgba(59, 130, 246, 0.2),
-    0 4px 16px rgba(0, 0, 0, 0.4);
+  text-shadow: none;
 }
 
 html[data-theme="light"] .header-title .hl {
-  color: #1e40af;
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-shadow: 
     0 0 30px rgba(30, 64, 175, 0.3),
     0 0 50px rgba(59, 130, 246, 0.2),
@@ -235,7 +249,8 @@ html[data-theme="light"] .header-title .hl {
   border-radius: 2px;
   transform: scaleX(0);
   transform-origin: left;
-  animation: underline-draw 0.7s ease 0.9s forwards;
+  animation: none;
+  display: none;
 }
 
 @keyframes underline-draw {
@@ -329,15 +344,52 @@ html[data-theme="light"] .stat-label {
 .cards-section {
   position: relative;
   z-index: 1;
-  padding: 0 2rem 6rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 450px;
+}
+
+.cards-section::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  z-index: -1;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.cards-section:has(.flip-card:hover)::before {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 5;
 }
 
 .flip-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
   gap: 2rem;
+  animation: scroll-cards 30s linear infinite;
+  padding-right: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.cards-section:hover .flip-grid {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-cards {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .flip-card {
@@ -345,6 +397,9 @@ html[data-theme="light"] .stat-label {
   height: 320px;
   perspective: 1200px;
   cursor: pointer;
+  flex-shrink: 0;
+  width: 280px;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
 }
 
 .flip-card:nth-child(1) {
@@ -383,12 +438,17 @@ html[data-theme="light"] .stat-label {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transition: transform 1.2s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.6s ease;
   border-radius: 22px;
 }
 
 .flip-card:hover .flip-inner {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) scale(1.35);
+  box-shadow: 0 40px 80px rgba(59, 130, 246, 0.4);
+}
+
+.flip-card:hover {
+  transform: scale(1.35);
 }
 
 .flip-front,
@@ -412,6 +472,12 @@ html[data-theme="light"] .stat-label {
   box-shadow: 0 6px 30px rgba(59, 130, 246, 0.08);
   transition: box-shadow 0.3s, transform 0.3s;
   overflow: hidden;
+}
+
+html[data-theme="dark"] .flip-front {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1.5px solid rgba(59, 130, 246, 0.25);
+  box-shadow: 0 6px 30px rgba(59, 130, 246, 0.12);
 }
 
 .flip-front::before {
@@ -473,7 +539,7 @@ html[data-theme="light"] .stat-label {
   font-size: 2.2rem;
   margin-bottom: 1.1rem;
   position: relative;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .flip-card:hover .icon-bubble {
@@ -506,10 +572,18 @@ html[data-theme="light"] .stat-label {
   margin-bottom: 0.4rem;
 }
 
+html[data-theme="dark"] .card-title {
+  color: #f0f9ff;
+}
+
 .card-org {
   font-size: 0.78rem;
   color: var(--muted);
   font-weight: 400;
+}
+
+html[data-theme="dark"] .card-org {
+  color: #cbd5e1;
 }
 
 .hover-cue {
@@ -556,7 +630,7 @@ html[data-theme="light"] .stat-label {
   position: absolute;
   inset: 0;
   border-radius: 22px;
-  background: var(--back-grad, linear-gradient(135deg, #1e40af, #3b82f6));
+  background: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa);
   z-index: 0;
 }
 

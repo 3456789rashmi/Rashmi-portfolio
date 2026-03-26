@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import '../styles/Projects.css';
-import certifyVideo from '../assets/cerif.mp4';
-import unitedPackersVideo from '../assets/unitedpackers.mp4';
-import hospitalVideo from '../assets/hospital.mp4';
-import bubbleGameVideo from '../assets/bubblegame.mp4';
 
 const Projects = () => {
+  const [videoErrors, setVideoErrors] = useState({});
+
   const projects = [
     {
       id: 1,
@@ -21,7 +19,7 @@ const Projects = () => {
         'Data integrity and fraud prevention'
       ],
       techStack: ['React', 'PHP', 'MySQL', 'Tailwind CSS'],
-      video: certifyVideo,
+      video: 'https://ik.imagekit.io/rashmi05/Project-videos/cerif.mp4',
       github: 'https://github.com/3456789rashmi/certif',
       liveDemo: 'https://certifychain-demo.com',
       layout: 'left'
@@ -39,7 +37,7 @@ const Projects = () => {
         'User-friendly wholesale dashboard'
       ],
       techStack: ['React', 'Node.js', 'MongoDB', 'Express'],
-      video: unitedPackersVideo,
+      video: 'https://ik.imagekit.io/rashmi05/Project-videos/unitedpackers.mp4',
       github: 'https://github.com/3456789rashmi/CustomerCareService',
       liveDemo: 'https://unitedpackers-one.onrender.com/',
       layout: 'right'
@@ -57,7 +55,7 @@ const Projects = () => {
         'Role-based access control (RBAC)'
       ],
       techStack: ['React', 'Node.js', 'MongoDB', 'Express'],
-      video: hospitalVideo,
+      video: 'https://ik.imagekit.io/rashmi05/Project-videos/hospital.mp4',
       github: 'https://github.com/3456789rashmi/Hospital_management_mern',
       liveDemo: 'https://hospital-management-system-ashy.vercel.app/',
       layout: 'left'
@@ -75,7 +73,7 @@ const Projects = () => {
         'Responsive design for all devices'
       ],
       techStack: ['React', 'JavaScript', 'HTML5', 'CSS3'],
-      video: bubbleGameVideo,
+      video: 'https://ik.imagekit.io/rashmi05/Project-videos/bubblegame.mp4?updatedAt=1774353445413',
       github: 'https://github.com/3456789rashmi/bubble-game',
       liveDemo: 'https://bubble-game-rho-eight.vercel.app/',
       layout: 'right'
@@ -93,17 +91,26 @@ const Projects = () => {
               {/* Video Section */}
               <div className="project-video">
                 <div className="video-wrapper">
-                  <video
-                    src={project.video}
-                    controls
-                    autoPlay
-                    muted
-                    loop
-                    poster={project.video}
-                    className="video-element"
-                  >
-                    Your browser does not support the video tag.
-                  </video>
+                  {videoErrors[project.id] ? (
+                    <div className="video-error-placeholder">
+                      <div className="error-content">
+                        <p>📹 Video not available</p>
+                        <p className="error-url">{project.video}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <video
+                      src={project.video}
+                      controls
+                      autoPlay
+                      muted
+                      loop
+                      className="video-element"
+                      onError={() => setVideoErrors(prev => ({ ...prev, [project.id]: true }))}
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
                 </div>
               </div>
 

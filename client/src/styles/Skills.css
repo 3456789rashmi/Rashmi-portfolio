@@ -1,5 +1,5 @@
 /* ============================================
-   SKILLS SECTION - RADIAL OOZING ANIMATION
+   SKILLS SECTION - TECH GALAXY
    ============================================ */
 
 .skills-section {
@@ -37,15 +37,15 @@ html[data-theme="light"] .skills-section {
 }
 
 .skills-title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
-  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin: 0 0 10px 0;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  text-transform: none;
+  letter-spacing: -0.02em;
 }
 
 html[data-theme="light"] .skills-title {
@@ -72,103 +72,10 @@ html[data-theme="light"] .skills-subtitle {
 }
 
 /* ============================================
-   MAIN SKILLSET CARD CONTAINER
+   SKILL GALAXY CONTAINER
    ============================================ */
 
 .skillset-container {
-  position: relative;
-  width: 100%;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 1000px;
-  min-height: 500px;
-}
-
-.skillset-card {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  background: #1a1f2e;
-  border: 2px solid rgba(59, 130, 246, 0.4);
-  border-radius: 24px;
-  padding: 40px 50px;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
-}
-
-html[data-theme="light"] .skillset-card {
-  background: #ffffff;
-  border-color: rgba(59, 130, 246, 0.5);
-}
-
-.skillset-card.main {
-  width: 280px;
-  height: 320px;
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-  border: 2px solid rgba(59, 130, 246, 0.6);
-  box-shadow: 0 8px 40px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-html[data-theme="light"] .skillset-card.main {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border-color: rgba(59, 130, 246, 0.5);
-}
-
-.skillset-card.main.center {
-  width: 240px;
-  height: 280px;
-  padding: 30px;
-  z-index: 50;
-}
-
-.skillset-image {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  opacity: 0.8;
-  filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.3));
-  transition: all 0.3s ease;
-}
-
-.skillset-card.main:hover .skillset-image {
-  opacity: 1;
-  filter: drop-shadow(0 6px 16px rgba(59, 130, 246, 0.5));
-}
-
-.skillset-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0;
-  text-align: center;
-  letter-spacing: 1px;
-}
-
-html[data-theme="light"] .skillset-title {
-  color: #1e40af;
-}
-
-.skillset-subtitle-card {
-  font-size: 0.9rem;
-  color: rgba(200, 200, 220, 0.8);
-  margin: 0;
-  text-align: center;
-}
-
-html[data-theme="light"] .skillset-subtitle-card {
-  color: rgba(60, 80, 120, 0.8);
-}
-
-/* ============================================
-   EXPANDED SKILLSET CONTAINER
-   ============================================ */
-
-.skillset-expanded-container {
   position: relative;
   width: 100%;
   height: 700px;
@@ -176,258 +83,279 @@ html[data-theme="light"] .skillset-subtitle-card {
   align-items: center;
   justify-content: center;
   perspective: 1500px;
+  margin: 0 auto;
 }
 
-/* ============================================
-   INDIVIDUAL SKILL CARDS - RADIAL LAYOUT
-   ============================================ */
-
-.skill-card-item {
+.orbital-paths {
   position: absolute;
-  width: auto;
-  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.2));
-}
-
-.skill-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background: #2a3550;
-  border: 2px solid rgba(59, 130, 246, 0.5);
-  border-radius: 18px;
-  padding: 28px 24px;
-  width: 140px;
-  text-align: center;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-html[data-theme="light"] .skill-card {
-  background: #ffffff;
-  border-color: rgba(59, 130, 246, 0.4);
-}
-
-.skill-card::before {
-  content: '';
-  position: absolute;
+  width: 600px;
+  height: 600px;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  margin: auto;
+  z-index: 1;
   pointer-events: none;
 }
 
-.skill-card:hover::before {
-  opacity: 1;
-}
+/* ============================================
+   GALAXY VIEW - CENTER & PLANETS
+   ============================================ */
 
-.skill-card:hover {
-  background: #3a4560;
-  border-color: rgba(59, 130, 246, 0.8);
-  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.4);
-  transform: translateY(-8px);
-}
-
-html[data-theme="light"] .skill-card:hover {
-  background: #f8fafc;
-  border-color: rgba(59, 130, 246, 0.7);
-}
-
-.skill-icon-wrapper {
+.skill-galaxy {
   position: relative;
-  width: 56px;
-  height: 56px;
+  width: 600px;
+  height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* CENTER AVATAR */
+.galaxy-center {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  z-index: 50;
+  cursor: pointer;
+}
+
+.center-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.4),
+              inset 0 0 20px rgba(59, 130, 246, 0.2);
+  transition: all 0.3s ease;
+}
+
+.center-glow {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3), transparent);
+  animation: center-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes center-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.galaxy-center:hover .center-image {
+  border-color: rgba(59, 130, 246, 0.8);
+  box-shadow: 0 0 60px rgba(59, 130, 246, 0.6),
+              inset 0 0 30px rgba(59, 130, 246, 0.3);
+}
+
+html[data-theme="light"] .center-image {
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.3),
+              inset 0 0 20px rgba(37, 99, 235, 0.1);
+}
+
+html[data-theme="light"] .galaxy-center:hover .center-image {
+  border-color: rgba(37, 99, 235, 0.8);
+  box-shadow: 0 0 60px rgba(37, 99, 235, 0.4),
+              inset 0 0 30px rgba(37, 99, 235, 0.2);
+}
+
+/* ORBITING SKILL PLANETS */
+.orbital-skill-wrapper {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-planet {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border: none;
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
-  border-radius: 14px;
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.3s ease;
+  border: 2px solid rgba(59, 130, 246, 0.4);
+  padding: 0;
+  overflow: hidden;
 }
 
-html[data-theme="light"] .skill-icon-wrapper {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
-}
-
-.skill-card:hover .skill-icon-wrapper {
-  background: linear-gradient(135deg, var(--skill-color, #3b82f6), rgba(139, 92, 246, 0.3));
+.skill-planet:hover {
+  transform: scale(1.3);
   border-color: var(--skill-color, #3b82f6);
-  box-shadow: 0 0 24px rgba(59, 130, 246, 0.4);
-  transform: scale(1.1);
+  background: radial-gradient(circle, var(--skill-color, #3b82f6), rgba(139, 92, 246, 0.4));
+  box-shadow: 0 0 30px var(--skill-color, #3b82f6),
+              inset 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
-.skill-icon {
-  font-size: 28px;
+.planet-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--skill-color, #3b82f6) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  filter: blur(10px);
+}
+
+.skill-planet:hover .planet-glow {
+  opacity: 0.5;
+}
+
+.planet-icon {
+  font-size: 32px;
   color: var(--skill-color, #3b82f6);
+  z-index: 2;
   transition: all 0.3s ease;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
 }
 
-.skill-card:hover .skill-icon {
+.skill-planet:hover .planet-icon {
   color: #ffffff;
   filter: drop-shadow(0 0 12px var(--skill-color, #3b82f6));
+  transform: scale(1.2);
 }
 
-html[data-theme="light"] .skill-card:hover .skill-icon {
+html[data-theme="light"] .skill-planet:hover .planet-icon {
   color: var(--skill-color, #3b82f6);
-  filter: drop-shadow(0 0 8px var(--skill-color, #3b82f6));
 }
 
-.skill-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #f0f0f0;
-  margin: 0;
-  letter-spacing: 0.5px;
+/* Skill Label */
+.skill-label {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
   white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(200, 200, 220, 0.9);
+  text-align: center;
+  letter-spacing: 0.5px;
+  z-index: 10;
 }
 
-html[data-theme="light"] .skill-name {
+html[data-theme="light"] .skill-label {
+  color: rgba(30, 40, 60, 0.9);
+}
+
+/* ============================================
+   SKILL DETAIL VIEW (ZOOMED IN)
+   ============================================ */
+
+.skill-detail-view {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.detail-close-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  color: #f0f0f0;
+  font-size: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.detail-close-btn:hover {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.6);
+  transform: rotate(90deg);
+}
+
+html[data-theme="light"] .detail-close-btn {
+  color: #0f172a;
+}
+
+.detail-content {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  padding: 80px;
+  border-radius: 32px;
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.4);
+  max-width: 500px;
+  width: 90%;
+}
+
+html[data-theme="light"] .detail-content {
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+  border-color: rgba(37, 99, 235, 0.2);
+}
+
+.detail-icon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 30px;
+  background: radial-gradient(circle, var(--skill-color, #3b82f6), rgba(139, 92, 246, 0.3));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 40px var(--skill-color, #3b82f6);
+}
+
+.detail-large-icon {
+  font-size: 60px;
+  color: #ffffff;
+}
+
+html[data-theme="light"] .detail-large-icon {
+  color: var(--skill-color, #3b82f6);
+}
+
+.detail-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 15px 0;
+  letter-spacing: -0.02em;
+}
+
+html[data-theme="light"] .detail-title {
   color: #1e40af;
 }
 
-/* ============================================
-   ANIMATED BACKGROUND EFFECTS
-   ============================================ */
-
-.skills-bg-elements {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
+.detail-text {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  line-height: 1.6;
 }
 
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.3;
-  mix-blend-mode: screen;
-}
-
-.blob-1 {
-  width: 500px;
-  height: 500px;
-  background: linear-gradient(135deg, #3b82f6, #06b6d4);
-  top: -100px;
-  right: -100px;
-  animation: blob-move 15s ease-in-out infinite;
-}
-
-.blob-2 {
-  width: 400px;
-  height: 400px;
-  background: linear-gradient(135deg, #06b6d4, #3b82f6);
-  bottom: -50px;
-  left: -50px;
-  animation: blob-move-reverse 18s ease-in-out infinite;
-}
-
-.blob-3 {
-  width: 350px;
-  height: 350px;
-  background: linear-gradient(135deg, #3b82f6, #06b6d4);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: blob-move 20s ease-in-out infinite;
-}
-
-html[data-theme="light"] .blob {
-  opacity: 0.15;
-  mix-blend-mode: multiply;
-}
-
-@keyframes blob-move {
-  0%, 100% { transform: translate(0, 0); }
-  33% { transform: translate(50px, -50px); }
-  66% { transform: translate(-50px, 50px); }
-}
-
-@keyframes blob-move-reverse {
-  0%, 100% { transform: translate(0, 0); }
-  33% { transform: translate(-50px, 50px); }
-  66% { transform: translate(50px, -50px); }
-}
-
-.gradient-orbs {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.15;
-  mix-blend-mode: multiply;
-}
-
-.orb-blue {
-  width: 600px;
-  height: 600px;
-  background: #3b82f6;
-  top: 20%;
-  left: 10%;
-  animation: float-orb 20s ease-in-out infinite;
-}
-
-.orb-purple {
-  width: 500px;
-  height: 500px;
-  background: #06b6d4;
-  bottom: 10%;
-  right: 10%;
-  animation: float-orb-reverse 18s ease-in-out infinite;
-}
-
-.orb-green {
-  width: 400px;
-  height: 400px;
-  background: #06b6d4;
-  top: 50%;
-  right: 20%;
-  animation: float-orb 22s ease-in-out infinite;
-}
-
-@keyframes float-orb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(30px, -30px) scale(1.05); }
-}
-
-@keyframes float-orb-reverse {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-30px, 30px) scale(0.95); }
-}
-
-/* ============================================
-   SCROLL PROGRESS INDICATOR
-   ============================================ */
-
-.scroll-progress-indicator {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b);
-  z-index: 1000;
-  transform-origin: left;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+html[data-theme="light"] .detail-text {
+  color: rgba(30, 40, 60, 0.85);
 }
 
 /* ============================================
@@ -444,144 +372,184 @@ html[data-theme="light"] .blob {
     margin-bottom: 60px;
   }
 
-  .skillset-expanded-container {
+  .skillset-container {
     height: 600px;
   }
 
-  .skillset-card.main {
-    width: 240px;
-    height: 280px;
+  .skill-galaxy {
+    width: 500px;
+    height: 500px;
   }
 
-  .skill-card {
+  .orbital-paths {
+    width: 500px;
+    height: 500px;
+  }
+
+  .galaxy-center {
     width: 120px;
-    padding: 22px 18px;
+    height: 120px;
+  }
+
+  .orbital-skill-wrapper {
+    width: 80px;
+    height: 80px;
+  }
+
+  .skill-planet {
+    width: 70px;
+    height: 70px;
+  }
+
+  .planet-icon {
+    font-size: 28px;
+  }
+
+  .detail-content {
+    padding: 60px 40px;
+  }
+
+  .detail-close-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
   }
 }
 
 @media (max-width: 768px) {
-  .skills-title {
-    font-size: clamp(2rem, 5vw, 2.8rem);
-  }
-
-  .skills-subtitle {
-    font-size: 0.9rem;
-  }
-
-  .skillset-container {
-    min-height: 400px;
-  }
-
-  .skillset-expanded-container {
-    height: 500px;
-  }
-
-  .skillset-card.main {
-    width: 220px;
-    height: 260px;
-    padding: 30px;
-  }
-
-  .skillset-image {
-    width: 60px;
-    height: 60px;
-  }
-
-  .skillset-title {
-    font-size: 1.4rem;
-  }
-
-  .skill-card {
-    width: 110px;
-    padding: 18px 14px;
-    gap: 8px;
-  }
-
-  .skill-icon {
-    font-size: 24px;
-  }
-
-  .skill-name {
-    font-size: 0.85rem;
-  }
-
-  .blob-1, .blob-2, .blob-3 {
-    filter: blur(60px);
-  }
-}
-
-@media (max-width: 480px) {
   .skills-section {
-    padding: 40px 16px;
+    padding: 40px 15px;
     min-height: auto;
+  }
+
+  .skills-title {
+    font-size: 2rem;
   }
 
   .title-wrapper {
     margin-bottom: 40px;
   }
 
+  .skillset-container {
+    height: 500px;
+  }
+
+  .skill-galaxy {
+    width: 400px;
+    height: 400px;
+  }
+
+  .orbital-paths {
+    width: 400px;
+    height: 400px;
+  }
+
+  .galaxy-center {
+    width: 100px;
+    height: 100px;
+  }
+
+  .center-image {
+    border-width: 2px;
+  }
+
+  .orbital-skill-wrapper {
+    width: 65px;
+    height: 65px;
+  }
+
+  .skill-planet {
+    width: 60px;
+    height: 60px;
+  }
+
+  .planet-icon {
+    font-size: 24px;
+  }
+
+  .skill-label {
+    font-size: 0.75rem;
+    bottom: -25px;
+  }
+
+  .detail-content {
+    padding: 40px 30px;
+    max-width: 90%;
+  }
+
+  .detail-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .detail-large-icon {
+    font-size: 48px;
+  }
+
+  .detail-title {
+    font-size: 2rem;
+  }
+
+  .detail-close-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    top: 20px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 480px) {
   .skills-title {
-    font-size: 1.8rem;
-    letter-spacing: 1px;
+    font-size: 1.6rem;
+  }
+
+  .skills-subtitle {
+    font-size: 0.85rem;
   }
 
   .skillset-container {
-    min-height: 350px;
+    height: 400px;
   }
 
-  .skillset-expanded-container {
-    height: 450px;
+  .skill-galaxy {
+    width: 300px;
+    height: 300px;
   }
 
-  .skillset-card.main {
-    width: 200px;
-    height: 240px;
-    padding: 24px;
-    gap: 12px;
+  .orbital-paths {
+    width: 300px;
+    height: 300px;
   }
 
-  .skillset-image {
+  .galaxy-center {
+    width: 80px;
+    height: 80px;
+  }
+
+  .orbital-skill-wrapper {
+    width: 55px;
+    height: 55px;
+  }
+
+  .skill-planet {
     width: 50px;
     height: 50px;
   }
 
-  .skillset-title {
-    font-size: 1.2rem;
-  }
-
-  .skillset-subtitle-card {
-    font-size: 0.8rem;
-  }
-
-  .skill-card {
-    width: 95px;
-    padding: 14px 10px;
-    gap: 6px;
-  }
-
-  .skill-icon-wrapper {
-    width: 44px;
-    height: 44px;
-  }
-
-  .skill-icon {
+  .planet-icon {
     font-size: 20px;
   }
 
-  .skill-name {
-    font-size: 0.75rem;
+  .detail-content {
+    padding: 30px 20px;
   }
 
-  .blob {
-    filter: blur(40px);
+  .detail-title {
+    font-size: 1.5rem;
   }
 
-  .blob-1, .blob-2 {
-    opacity: 0.2;
-  }
-
-  .orb {
-    filter: blur(80px);
-    opacity: 0.1;
+  .detail-text {
+    font-size: 0.95rem;
   }
 }

@@ -1,57 +1,100 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/About.css';
 
 const About = () => {
-  const testimonials = [
+  const [visibleItems, setVisibleItems] = useState([]);
+
+  const journeyItems = [
     {
-      quote: "I don't chase perfection. I build, break, learn, and build again.",
+      tag: "12th Grade · The Beginning",
+      title: "Curiosity clicked something",
+      description: "Started poking at HTML and CSS out of pure curiosity — no roadmap, no bootcamp. Just a browser and a burning need to know how things worked. That idle habit never really went away.",
+      isNow: false
     },
     {
-      quote: "I know I'm not successful enough, but I'm passionate enough not to worry about success.",
+      tag: "First Real Project",
+      title: "Breaking things to understand them",
+      description: "The first time I pressed 'run' and everything went wrong was the moment I actually started learning. Error messages stopped being scary and started being clues. Still my favourite way to learn.",
+      isNow: false
     },
     {
-      quote: "Most of my learning happened after pressing the 'run' button.",
+      tag: "React Era",
+      title: "Building things that feel alive",
+      description: "React changed how I think about UIs — components, state, the flow of data. Spent a lot of late nights rebuilding the same thing five different ways just to really understand it.",
+      isNow: false
+    },
+    {
+      tag: "Now",
+      title: "Open source, freelancing, and more",
+      description: "Contributing to projects I actually use, taking on freelance work, and leaning into graphic design. Anything that lets me create something from scratch — that's the space I want to keep growing in.",
+      isNow: true
     }
   ];
+
+  const quote = "For me, development is less about writing code and more about the process of building, learning, and improving a little every day.";
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.dataset.index);
+            setVisibleItems((prev) => {
+              if (!prev.includes(index)) {
+                return [...prev, index].sort((a, b) => a - b);
+              }
+              return prev;
+            });
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    document.querySelectorAll('.journey-item').forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <section id="about" className="about">
       <div className="about-container">
-        {/* About Content */}
-        <div className="about-content">
-          {/* Photo Section */}
-          <div className="about-photo">
-            <img src={require('../assets/Rashmi.jpeg')} alt="Rashmi" />
-          </div>
+        <h2 className="about-title">About Me</h2>
 
-          {/* Text Section */}
-          <div className="about-text">
-            <h2>About Me</h2>
-            <p>
-              Hi, I'm Rashmi Sharma, a developer from India who enjoys building things on the internet.
-            </p>
-            <p>
-              I started exploring web development when I was in 12th grade, mostly out of curiosity. Since then, it has turned into something I genuinely enjoy spending time on. I like turning ideas into simple, functional web experiences and experimenting with different ways to design and build them.
-            </p>
-            <p>
-              Most of my time goes into working with React and modern web tools, building side projects, and learning by actually making things. Outside of coding, I enjoy Open-Source contributions, Freelancing, and Graphic Design – anything that lets me create something from scratch.
-            </p>
-            <p>
-              For me, development is less about writing code and more about the process of building, learning, and improving a little every day.
-            </p>
-          </div>
+        <div className="intro-text">
+          <p>
+            Hi, I'm Rashmi Sharma, a developer from India who enjoys building things on the internet. This is my journey so far.
+          </p>
         </div>
 
-        {/* Testimonials Section */}
-        <div className="testimonials">
-          <div className="testimonials-grid">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="testimonial-card">
-                <p className="testimonial-quote">{testimonial.quote}</p>
-                {/* <p className="testimonial-author">{testimonial.author}</p> */}
+        {/* Journey Timeline */}
+        <div className="journey-timeline">
+          <div className="timeline-line"></div>
+
+          {journeyItems.map((item, index) => (
+            <div
+              key={index}
+              className={`journey-item ${index % 2 === 0 ? 'left' : 'right'} ${visibleItems.includes(index) ? 'visible' : ''}`}
+              data-index={index}
+            >
+              <div className="timeline-dot"></div>
+              <div className={`journey-card ${item.isNow ? 'now' : ''}`}>
+                <div className="journey-tag">{item.tag}</div>
+                <h3 className="journey-title">{item.title}</h3>
+                <p className="journey-text">{item.description}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Quote Card */}
+        <div className="quote-card">
+          <div className="quote-mark">"</div>
+          <p className="quote-text">{quote}</p>
         </div>
       </div>
     </section>

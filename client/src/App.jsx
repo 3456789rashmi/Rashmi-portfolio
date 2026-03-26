@@ -5,6 +5,7 @@ import About from './components/About.jsx';
 import Skills from './components/Skills.jsx';
 import Achievements from './components/Achievements.jsx';
 import Projects from './components/Projects.jsx';
+import AiAssistant from './components/AiAssistant.jsx';
 import Contact from './components/Contact.jsx';
 import './styles/App.css';
 
@@ -17,6 +18,7 @@ function App() {
       <Skills />
       <Achievements />
       <Projects />
+      <AiAssistant />
       <Contact />
     </div>
   );

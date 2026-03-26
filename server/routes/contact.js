@@ -19,7 +19,8 @@ router.post("/", async (req, res) => {
 
     // Validate required fields
     if (!name || !email || !message) {
-      return res.status(400).json({ error: "Missing required fields" });
+      console.warn('Missing required fields:', { name: !!name, email: !!email, message: !!message });
+      return res.status(400).json({ error: "Missing required fields: name, email, and message are all required." });
     }
 
     // Save to database
@@ -30,46 +31,62 @@ router.post("/", async (req, res) => {
     });
 
     await contact.save();
+    console.log('Contact saved successfully:', contact._id);
 
     // Send email notification to admin
     if (process.env.EMAIL_USER && process.env.EMAIL_PASSWORD) {
-      const adminMailOptions = {
-        from: process.env.EMAIL_USER,
-        to: process.env.ADMIN_EMAIL,
-        subject: `New Contact Message from ${name}`,
-        html: `
-          <h2>New Contact Message</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message.replace(/\n/g, '<br>')}</p>
-          <p><small>Message ID: ${contact._id}</small></p>
-        `,
-      };
+      try {
+        const adminMailOptions = {
+          from: process.env.EMAIL_USER,
+          to: process.env.ADMIN_EMAIL,
+          subject: `New Contact Message from ${name}`,
+          html: `
+            <h2>New Contact Message</h2>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong></p>
+            <p>${message.replace(/\n/g, '<br>')}</p>
+            <p><small>Message ID: ${contact._id}</small></p>
+          `,
+        };
 
-      await transporter.sendMail(adminMailOptions);
+        await transporter.sendMail(adminMailOptions);
+        console.log('Admin email sent to:', process.env.ADMIN_EMAIL);
 
-      // Send confirmation email to user
-      const userMailOptions = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: "Thank you for contacting me!",
-        html: `
-          <h2>Hi ${name},</h2>
-          <p>Thank you for reaching out! I've received your message and will get back to you as soon as possible.</p>
-          <p><strong>Your Message:</strong></p>
-          <p>${message.replace(/\n/g, '<br>')}</p>
-          <p>Best regards,<br>Rashmi Sharma</p>
-        `,
-      };
+        // Send confirmation email to user
+        const userMailOptions = {
+          from: process.env.EMAIL_USER,
+          to: email,
+          subject: "Thank you for contacting me!",
+          html: `
+            <h2>Hi ${name},</h2>
+            <p>Thank you for reaching out! I've received your message and will get back to you as soon as possible.</p>
+            <p><strong>Your Message:</strong></p>
+            <p>${message.replace(/\n/g, '<br>')}</p>
+            <p>Best regards,<br>Rashmi Sharma</p>
+          `,
+        };
 
-      await transporter.sendMail(userMailOptions);
+        await transporter.sendMail(userMailOptions);
+        console.log('User confirmation email sent to:', email);
+      } catch (emailError) {
+        console.warn('Email sending failed (but contact saved to DB):', emailError.message);
+        // Don't fail the request if email fails - message is already saved
+      }
+    } else {
+      console.warn('Email credentials not configured. Message saved but email not sent.');
     }
 
-    res.json({ success: true, message: "Message received. We'll get back to you soon!", contactId: contact._id });
+    res.json({ 
+      success: true, 
+      message: "Message received successfully! I'll get back to you soon.", 
+      contactId: contact._id 
+    });
   } catch (error) {
     console.error("Contact error:", error);
-    res.status(500).json({ error: "Failed to process message. Please try again." });
+    res.status(500).json({ 
+      error: `Failed to process message: ${error.message || 'Unknown error'}. Please try again.` 
+    });
   }
 });
 

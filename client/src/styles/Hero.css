@@ -216,9 +216,9 @@ html[data-theme="light"] .hero-role {
   background: linear-gradient(135deg, rgba(10, 15, 30, 0.95), rgba(20, 25, 45, 0.85));
   border: 2px solid rgba(59, 130, 246, 0.3);
   border-radius: 16px;
-  padding: 1.5rem;
+  padding: 1.2rem;
   font-family: 'Monaco', 'Courier New', monospace;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   line-height: 1.6;
   overflow: hidden;
   position: relative;
@@ -228,8 +228,8 @@ html[data-theme="light"] .hero-role {
     0 0 60px rgba(59, 130, 246, 0.2),
     inset 0 1px 0 rgba(59, 130, 246, 0.15);
   width: 100%;
-  max-width: 400px;
-  min-height: 250px;
+  max-width: 320px;
+  min-height: 160px;
   display: flex;
   flex-direction: column;
   transition: all 1s cubic-bezier(0.23, 1, 0.320, 1);
@@ -283,6 +283,122 @@ html[data-theme="light"] .code-snippet:hover {
     0 35px 90px rgba(15, 23, 42, 0.12),
     0 0 80px rgba(37, 99, 235, 0.2),
     inset 0 1px 0 rgba(37, 99, 235, 0.25);
+}
+
+/* Expanded Card State */
+.code-snippet.expanded {
+  max-width: 420px;
+  min-height: 420px;
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg) !important;
+  border-color: rgba(59, 130, 246, 0.8);
+  box-shadow:
+    0 40px 100px rgba(59, 130, 246, 0.4),
+    0 0 100px rgba(59, 130, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme="light"] .code-snippet.expanded {
+  border-color: rgba(37, 99, 235, 0.7);
+  box-shadow:
+    0 40px 100px rgba(37, 99, 235, 0.2),
+    0 0 100px rgba(37, 99, 235, 0.15),
+    inset 0 1px 0 rgba(37, 99, 235, 0.1);
+}
+
+/* Card Details */
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  padding: 0.5rem 0;
+  overflow-y: auto;
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.details-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #3b82f6;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 0.5px;
+}
+
+html[data-theme="light"] .details-title {
+  color: #1e40af;
+}
+
+.details-text {
+  font-size: 0.8rem;
+  color: rgba(200, 200, 220, 0.8);
+  margin: 0;
+  line-height: 1.5;
+}
+
+html[data-theme="light"] .details-text {
+  color: rgba(60, 80, 120, 0.8);
+}
+
+.details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.details-section h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #06b6d4;
+  margin: 0.5rem 0 0.3rem 0;
+  letter-spacing: 0.3px;
+}
+
+html[data-theme="light"] .details-section h4 {
+  color: #0369a1;
+}
+
+.details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.details-list li {
+  font-size: 0.75rem;
+  color: rgba(200, 200, 220, 0.7);
+  margin: 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.details-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+html[data-theme="light"] .details-list li {
+  color: rgba(60, 80, 120, 0.7);
+}
+
+html[data-theme="light"] .details-list li::before {
+  color: #1e40af;
 }
 
 .code-header {
@@ -466,8 +582,8 @@ html[data-theme="light"] .punctuation {
   }
 
   .code-snippet {
-    padding: 1.5rem;
-    font-size: 0.85rem;
+    padding: 1.2rem;
+    font-size: 0.75rem;
     min-height: auto;
   }
 

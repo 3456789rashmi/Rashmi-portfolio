@@ -7,6 +7,8 @@ import Mycv from '../assets/Mycv.pdf';
 
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [scrollTilt, setScrollTilt] = useState({ x: 0, y: 0 });
   const cardRef = useRef(null);
   const nameRef = useRef(null);
   
@@ -66,7 +68,7 @@ const Hero = () => {
   // Mouse tracking for 3D effect
   useEffect(() => {
     const handleMouseMove = (e) => {
-      if (!cardRef.current) return;
+      if (!cardRef.current || isExpanded) return;
 
       const card = cardRef.current;
       const x = (window.innerWidth / 2 - e.clientX) / 25;
@@ -76,8 +78,8 @@ const Hero = () => {
     };
 
     const handleMouseLeave = () => {
-      if (cardRef.current) {
-        cardRef.current.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+      if (cardRef.current && !isExpanded) {
+        cardRef.current.style.transform = `perspective(1000px) rotateY(${scrollTilt.x}deg) rotateX(${scrollTilt.y}deg)`;
         cardRef.current.classList.add('loaded');
       }
     };
@@ -89,7 +91,27 @@ const Hero = () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, []);
+  }, [isExpanded, scrollTilt]);
+
+  // Scroll-based tilting effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!cardRef.current || isExpanded) return;
+
+      const scrollY = window.scrollY;
+      const maxScroll = window.innerHeight;
+      
+      // Calculate tilt based on scroll
+      const tiltX = (scrollY / maxScroll) * 15;
+      const tiltY = (scrollY / maxScroll) * -10;
+      
+      setScrollTilt({ x: tiltX, y: tiltY });
+      cardRef.current.style.transform = `perspective(1000px) rotateY(${tiltY}deg) rotateX(${tiltX}deg)`;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isExpanded]);
 
   const handleCopyCode = () => {
     const code = `class RashmiSharma {
@@ -167,55 +189,86 @@ const Hero = () => {
 
         {/* Right Side - Code Snippet */}
         <div className="hero-code-wrapper">
-          <div className="code-snippet" ref={cardRef}>
-            <div className="code-header">
-              <span className="code-title">RashmiSharma.jsx</span>
-              <button 
-                className="copy-btn" 
-                onClick={handleCopyCode}
-                title="Copy code"
-              >
-                📋
-              </button>
-            </div>
-            <div className="code-content">
-              <div className="code-line">
-                <span className="keyword">class</span> 
-                <span className="class-name">RashmiSharma</span> 
-                <span className="punctuation">{' {'}</span>
+          <div 
+            className={`code-snippet ${isExpanded ? 'expanded' : ''}`}
+            ref={cardRef}
+            onMouseEnter={() => setIsExpanded(true)}
+            onMouseLeave={() => setIsExpanded(false)}
+          >
+            {!isExpanded ? (
+              <>
+                <div className="code-header">
+                  <span className="code-title">RashmiSharma.jsx</span>
+                  <button 
+                    className="copy-btn" 
+                    onClick={handleCopyCode}
+                    title="Copy code"
+                  >
+                    📋
+                  </button>
+                </div>
+                <div className="code-content">
+                  <div className="code-line">
+                    <span className="keyword">class</span> 
+                    <span className="class-name">RashmiSharma</span> 
+                    <span className="punctuation">{' {'}</span>
+                  </div>
+                  <div className="code-line indent-1">
+                    <span className="keyword">constructor</span>
+                    <span className="punctuation">() {'{'}</span>
+                  </div>
+                  <div className="code-line indent-2">
+                    <span className="property">this.name</span>
+                    <span className="operator">=</span>
+                    <span className="string">"Rashmi Sharma"</span>
+                    <span className="punctuation">;</span>
+                  </div>
+                  <div className="code-line indent-2">
+                    <span className="property">this.role</span>
+                    <span className="operator">=</span>
+                    <span className="string">"Full Stack Developer"</span>
+                    <span className="punctuation">;</span>
+                  </div>
+                  <div className="code-line indent-2">
+                    <span className="property">this.skills</span>
+                    <span className="operator">=</span>
+                    <span className="punctuation">[</span>
+                    <span className="string">"React"</span>
+                    <span className="punctuation">,</span>
+                    <span className="string">"Node.js"</span>
+                    <span className="punctuation">];</span>
+                  </div>
+                  <div className="code-line indent-1">
+                    <span className="punctuation">{'}'}</span>
+                  </div>
+                  <div className="code-line">
+                    <span className="punctuation">{'}'}</span>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="card-details">
+                <h3 className="details-title">About Me</h3>
+                <p className="details-text">
+                  Full Stack Developer passionate about building scalable web applications with modern technologies.
+                </p>
+                <div className="details-section">
+                  <h4>💡 Expertise</h4>
+                  <ul className="details-list">
+                    <li>React & JavaScript</li>
+                    <li>Node.js & Express</li>
+                    <li>MongoDB & PostgreSQL</li>
+                    <li>REST APIs & Web Design</li>
+                  </ul>
+                </div>
+                <div className="details-section">
+                  <h4>🎯 Experience</h4>
+                  <p className="details-text">
+                    Building production-ready applications and mentoring junior developers.
+                  </p>
+                </div>
               </div>
-              <div className="code-line indent-1">
-                <span className="keyword">constructor</span>
-                <span className="punctuation">() {'{'}</span>
-              </div>
-              <div className="code-line indent-2">
-                <span className="property">this.name</span>
-                <span className="operator">=</span>
-                <span className="string">"Rashmi Sharma"</span>
-                <span className="punctuation">;</span>
-              </div>
-              <div className="code-line indent-2">
-                <span className="property">this.role</span>
-                <span className="operator">=</span>
-                <span className="string">"Full Stack Developer"</span>
-                <span className="punctuation">;</span>
-              </div>
-              <div className="code-line indent-2">
-                <span className="property">this.skills</span>
-                <span className="operator">=</span>
-                <span className="punctuation">[</span>
-                <span className="string">"React"</span>
-                <span className="punctuation">,</span>
-                <span className="string">"Node.js"</span>
-                <span className="punctuation">];</span>
-              </div>
-              <div className="code-line indent-1">
-                <span className="punctuation">{'}'}</span>
-              </div>
-              <div className="code-line">
-                <span className="punctuation">{'}'}</span>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

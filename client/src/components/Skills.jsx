@@ -6,61 +6,16 @@ import {
   SiMongodb, SiPostgresql, SiMysql,
   SiGit, SiGithub, SiDocker
 } from 'react-icons/si';
-import skillsetImage from '../assets/image.png';
+import pic3 from '../assets/pic3.png';
 import '../styles/Skills.css';
 import ScrollProgressIndicator from './ScrollProgressIndicator';
 
 const Skills = () => {
   const containerRef = useRef(null);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const scrollTimeoutRef = useRef(null);
+  const [selectedSkill, setSelectedSkill] = useState(null);
+  const [isHovering, setIsHovering] = useState(false);
 
-  // Auto-expand when section comes into view
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsExpanded(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
-      }
-    };
-  }, []);
-
-  // Collapse with delay when scrolling
-  React.useEffect(() => {
-    const handleScroll = () => {
-      // Clear existing timeout
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-
-      // Set new timeout to collapse after 2 seconds of scroll
-      scrollTimeoutRef.current = setTimeout(() => {
-        setIsExpanded(false);
-      }, 2000);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  // All technologies without categories
+  // All technologies
   const skills = [
     { name: 'React', icon: SiReact, color: '#61dafb' },
     { name: 'JavaScript', icon: SiJavascript, color: '#f7df1e' },
@@ -78,13 +33,13 @@ const Skills = () => {
     { name: 'Docker', icon: SiDocker, color: '#2496ed' },
   ];
 
-  // Calculate circular positions for child cards
-  const getChildPosition = (index) => {
+  // Calculate circular positions for orbiting skills
+  const getOrbitPosition = (index) => {
     const angle = (index / skills.length) * Math.PI * 2;
-    const radius = 250; // Distance from center
+    const radius = 280;
     const x = Math.cos(angle) * radius;
     const y = Math.sin(angle) * radius;
-    return { x, y };
+    return { x, y, angle };
   };
 
   return (
@@ -101,128 +56,116 @@ const Skills = () => {
           viewport={{ once: false }}
         >
           <h2 className="skills-title">
-            <span className="title-text">My Skillset</span>
+            <span className="title-text">My Tech Galaxy</span>
           </h2>
-          <p className="skills-subtitle">Scroll to see all technologies</p>
+          <p className="skills-subtitle">Hover to slow orbits • Click to explore</p>
         </motion.div>
 
-        {/* Main Skillset Card Container */}
+        {/* Skill Galaxy Container */}
         <div className="skillset-container">
+          <svg className="orbital-paths" viewBox="-350 -350 700 700">
+            <circle cx="0" cy="0" r="280" fill="none" stroke="rgba(59, 130, 246, 0.1)" strokeWidth="1" />
+          </svg>
+
           <AnimatePresence mode="wait">
-            {!isExpanded ? (
-              // PARENT CARD - Main Skillset
+            {!selectedSkill ? (
               <motion.div
-                key="parent"
-                layoutId="skillset-card"
-                className="skillset-card main"
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: '0 20px 60px rgba(59, 130, 246, 0.3)',
-                }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 120,
-                  damping: 15,
-                }}
+                key="galaxy"
+                className="skill-galaxy"
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
               >
-                <motion.img 
-                  src={skillsetImage} 
-                  alt="Skillset" 
-                  className="skillset-image"
-                />
-                <motion.h3 className="skillset-title">Skillset</motion.h3>
-                <motion.p className="skillset-subtitle-card">
-                  {skills.length} Technologies
-                </motion.p>
-              </motion.div>
-            ) : (
-              // EXPANDED STATE - Parent + Children
-              <motion.div
-                key="expanded"
-                className="skillset-expanded-container"
-              >
-                {/* Center Parent Card */}
+                {/* Center Avatar */}
                 <motion.div
-                  layoutId="skillset-card"
-                  className="skillset-card main center"
-                  whileHover={{ scale: 1.02 }}
+                  className="galaxy-center"
+                  whileHover={{ scale: 1.08 }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 150,
+                    damping: 20,
+                  }}
                 >
-                  <motion.img 
-                    src={skillsetImage} 
-                    alt="Skillset" 
-                    className="skillset-image"
-                  />
-                  <motion.h3 className="skillset-title">Skillset</motion.h3>
+                  <img src={pic3} alt="You" className="center-image" />
+                  <div className="center-glow"></div>
                 </motion.div>
 
-                {/* Child Tech Cards - Oozing Out */}
+                {/* Orbiting Skills */}
                 {skills.map((skill, index) => {
                   const Icon = skill.icon;
-                  const position = getChildPosition(index);
+                  const position = getOrbitPosition(index);
                   
                   return (
                     <motion.div
                       key={skill.name}
-                      layoutId={`skill-${index}`}
-                      className="skill-card-item"
-                      initial={{ 
-                        opacity: 0, 
-                        scale: 0,
-                        x: 0,
-                        y: 0,
-                      }}
-                      animate={{ 
-                        opacity: 1, 
-                        scale: 1,
-                        x: position.x,
-                        y: position.y,
-                      }}
-                      exit={{
-                        opacity: 0,
-                        scale: 0,
-                        x: 0,
-                        y: 0,
+                      className="orbital-skill-wrapper"
+                      animate={{
+                        x: isHovering ? position.x * 0.7 : position.x,
+                        y: isHovering ? position.y * 0.7 : position.y,
                       }}
                       transition={{
-                        type: 'spring',
-                        stiffness: 80,
-                        damping: 15,
-                        delay: index * 0.08,
+                        duration: isHovering ? 0.8 : 40,
+                        ease: isHovering ? 'easeOut' : 'linear',
+                        repeat: isHovering ? 0 : Infinity,
                       }}
-                      whileHover={{
-                        scale: 1.1,
-                        y: -10,
+                      style={{
+                        '--orbit-angle': `${position.angle}rad`,
                       }}
                     >
-                      <div 
-                        className="skill-card"
+                      <motion.button
+                        className="skill-planet"
                         style={{ '--skill-color': skill.color }}
+                        whileHover={{ scale: 1.2 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => setSelectedSkill(skill)}
+                        onTouchStart={() => setSelectedSkill(skill)}
                       >
-                        <div className="skill-icon-wrapper">
-                          <Icon className="skill-icon" />
-                        </div>
-                        <p className="skill-name">{skill.name}</p>
-                      </div>
+                        <div className="planet-glow"></div>
+                        <Icon className="planet-icon" />
+                      </motion.button>
+                      <motion.div
+                        className="skill-label"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: isHovering ? 1 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {skill.name}
+                      </motion.div>
                     </motion.div>
                   );
                 })}
               </motion.div>
+            ) : (
+              // Skill Detail View
+              <motion.div
+                key="detail"
+                className="skill-detail-view"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+              >
+                <button
+                  className="detail-close-btn"
+                  onClick={() => setSelectedSkill(null)}
+                >
+                  ✕
+                </button>
+                <motion.div
+                  className="detail-content"
+                  layoutId={`skill-${selectedSkill.name}`}
+                >
+                  <div
+                    className="detail-icon"
+                    style={{ '--skill-color': selectedSkill.color }}
+                  >
+                    <selectedSkill.icon className="detail-large-icon" />
+                  </div>
+                  <h3 className="detail-title">{selectedSkill.name}</h3>
+                  <p className="detail-text">Expert in {selectedSkill.name} development</p>
+                </motion.div>
+              </motion.div>
             )}
           </AnimatePresence>
-        </div>
-
-        {/* Animated Background Elements */}
-        <div className="skills-bg-elements">
-          <div className="blob blob-1"></div>
-          <div className="blob blob-2"></div>
-          <div className="blob blob-3"></div>
-        </div>
-
-        {/* Gradient Orbs */}
-        <div className="gradient-orbs">
-          <div className="orb orb-blue"></div>
-          <div className="orb orb-purple"></div>
-          <div className="orb orb-green"></div>
         </div>
       </div>
     </section>

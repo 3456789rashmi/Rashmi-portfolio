@@ -135,7 +135,7 @@ const Achievements = () => {
   };
 
   return (
-    <>
+    <section id="achievements">
       {/* Background Canvas */}
       <div className="bg-canvas achievements-bg">
         <div className="grid-lines"></div>
@@ -153,13 +153,6 @@ const Achievements = () => {
         </div>
         <h1 className="header-title">My <span className="hl">Achievements</span></h1>
         <p className="header-sub">A curated collection of certificates, recognitions &amp; milestones earned through hard work and dedication.</p>
-
-        <div className="stats-strip">
-          <div className="stat-item"><div className="stat-num" data-target="6">0</div><div className="stat-label">Achievements</div></div>
-          <div className="stat-item"><div className="stat-num" data-target="2">0</div><div className="stat-label">Hackathons</div></div>
-          <div className="stat-item"><div className="stat-num" data-target="1">0</div><div className="stat-label">Internship</div></div>
-          <div className="stat-item"><div className="stat-num" data-target="1">0</div><div className="stat-label">Certification</div></div>
-        </div>
       </header>
 
       {/* Wave Divider */}
@@ -173,12 +166,12 @@ const Achievements = () => {
       <section className="cards-section">
         <div className="flip-grid">
           {achievementsData.map((achievement) => (
-            <div key={achievement.id} className="flip-card" onClick={() => openModal(achievement)}>
+            <div key={`${achievement.id}-1`} className="flip-card" onClick={() => openModal(achievement)}>
               <div className="flip-inner">
                 {/* Front */}
                 <div className="flip-front">
                   <span className="card-number">{achievement.number}</span>
-                  <div className="icon-bubble" style={{ background: 'linear-gradient(135deg,' + achievement.grad.split(',')[1].split(')')[0] + ',' + achievement.grad.split(',')[2].split(')')[0] + ')' }}>
+                  <div className="icon-bubble" style={{ background: 'linear-gradient(135deg, #3b82f6, #60a5fa)' }}>
                     <div className="icon-bubble-glow"></div>
                     {achievement.icon}
                   </div>
@@ -192,7 +185,36 @@ const Achievements = () => {
                 </div>
 
                 {/* Back */}
-                <div className="flip-back" style={{ '--back-grad': achievement.grad }}>
+                <div className="flip-back">
+                  <span className="back-icon">{achievement.icon}</span>
+                  <h3 className="back-title">{achievement.title}</h3>
+                  <p className="back-desc">{achievement.desc.substring(0, 80)}...</p>
+                  <button className="back-btn" onClick={() => openModal(achievement)}>View Full Details</button>
+                </div>
+              </div>
+            </div>
+          ))}
+          {achievementsData.map((achievement) => (
+            <div key={`${achievement.id}-2`} className="flip-card" onClick={() => openModal(achievement)}>
+              <div className="flip-inner">
+                {/* Front */}
+                <div className="flip-front">
+                  <span className="card-number">{achievement.number}</span>
+                  <div className="icon-bubble" style={{ background: 'linear-gradient(135deg, #3b82f6, #60a5fa)' }}>
+                    <div className="icon-bubble-glow"></div>
+                    {achievement.icon}
+                  </div>
+                  <p className="card-category">{achievement.cat}</p>
+                  <h3 className="card-title">{achievement.title}</h3>
+                  <p className="card-org">{achievement.org}</p>
+                  <div className="hover-cue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 16l5-5 5 5" /><path d="M7 8h10" /></svg>
+                    Hover to reveal
+                  </div>
+                </div>
+
+                {/* Back */}
+                <div className="flip-back">
                   <span className="back-icon">{achievement.icon}</span>
                   <h3 className="back-title">{achievement.title}</h3>
                   <p className="back-desc">{achievement.desc.substring(0, 80)}...</p>
@@ -209,7 +231,7 @@ const Achievements = () => {
         <div className="modal-bg" onClick={closeModal}></div>
         <div className="modal">
           <button className="modal-close" onClick={closeModal}>✕</button>
-          <div className="modal-banner" id="m-banner" style={{ background: modalData?.grad }}>
+          <div className="modal-banner" id="m-banner" style={{ background: 'linear-gradient(135deg, #1e40af, #3b82f6)' }}>
             <span className="banner-icon">{modalData?.icon}</span>
           </div>
           <div className="modal-body">
@@ -233,7 +255,7 @@ const Achievements = () => {
         <span className="ribbon-dot"></span>
         Hover cards to flip &nbsp;·&nbsp; Click for full details
       </div>
-    </>
+    </section>
   );
 };
 
