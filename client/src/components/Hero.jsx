@@ -4,11 +4,14 @@ import { SiLeetcode } from 'react-icons/si';
 import gsap from 'gsap';
 import '../styles/Hero.css';
 import Mycv from '../assets/Mycv.pdf';
+import HelixBackground from './HelixBackground';
+import RashmiImage from '../assets/Rashmi.jpeg';
 
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const [scrollTilt, setScrollTilt] = useState({ x: 0, y: 0 });
+  const [particles, setParticles] = useState([]);
   const cardRef = useRef(null);
   const nameRef = useRef(null);
   
@@ -113,6 +116,24 @@ const Hero = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isExpanded]);
 
+  // Particle generation on expansion
+  useEffect(() => {
+    if (isExpanded) {
+      const particleCount = 12;
+      const newParticles = Array.from({ length: particleCount }).map((_, i) => ({
+        id: i,
+        angle: (i / particleCount) * Math.PI * 2,
+        distance: 80 + Math.random() * 40,
+        delay: Math.random() * 0.2,
+      }));
+      setParticles(newParticles);
+
+      // Clear particles after animation completes
+      const timer = setTimeout(() => setParticles([]), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [isExpanded]);
+
   const handleCopyCode = () => {
     const code = `class RashmiSharma {
   constructor() {
@@ -127,6 +148,7 @@ const Hero = () => {
 
   return (
     <section className="hero" id="hero">
+      <HelixBackground />
       <div className="hero-container">
         {/* Left Side - Text Content */}
         <div className="hero-content">
@@ -248,24 +270,23 @@ const Hero = () => {
               </>
             ) : (
               <div className="card-details">
-                <h3 className="details-title">About Me</h3>
-                <p className="details-text">
-                  Full Stack Developer passionate about building scalable web applications with modern technologies.
-                </p>
-                <div className="details-section">
-                  <h4>💡 Expertise</h4>
-                  <ul className="details-list">
-                    <li>React & JavaScript</li>
-                    <li>Node.js & Express</li>
-                    <li>MongoDB & PostgreSQL</li>
-                    <li>REST APIs & Web Design</li>
-                  </ul>
-                </div>
-                <div className="details-section">
-                  <h4>🎯 Experience</h4>
-                  <p className="details-text">
-                    Building production-ready applications and mentoring junior developers.
-                  </p>
+                {/* Particle dots */}
+                {particles.map((particle) => (
+                  <div
+                    key={particle.id}
+                    className="particle-dot"
+                    style={{
+                      '--tx': `${Math.cos(particle.angle) * particle.distance}px`,
+                      '--ty': `${Math.sin(particle.angle) * particle.distance}px`,
+                      animationDelay: `${particle.delay}s`,
+                      left: '50%',
+                      top: '50%',
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                  />
+                ))}
+                <div className="profile-image-wrapper" onClick={() => setIsExpanded(false)}>
+                  <img src={RashmiImage} alt="Rashmi Sharma" className="profile-image-card" />
                 </div>
               </div>
             )}

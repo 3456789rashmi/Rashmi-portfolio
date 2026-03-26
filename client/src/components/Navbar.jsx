@@ -5,11 +5,11 @@ import '../styles/Navbar.css';
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
-  const [theme, setTheme] = useState('light'); // 'dark' or 'light'
+  const [theme, setTheme] = useState('dark'); // 'dark' or 'light'
 
-  // Set light theme as default on component mount
+  // Set dark theme as default on component mount
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', 'light');
+    document.documentElement.setAttribute('data-theme', 'dark');
   }, []);
 
   const handleClick = () => setClick(!click);
@@ -49,27 +49,27 @@ const Navbar = () => {
         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
           <li className="nav-item">
             <button className="nav-links" onClick={() => scrollToSection('hero')}>
-              home
+              Home
             </button>
           </li>
           <li className="nav-item">
             <button className="nav-links" onClick={() => scrollToSection('about')}>
-              about me
+              About Me
             </button>
           </li>
           <li className="nav-item">
             <button className="nav-links" onClick={() => scrollToSection('projects')}>
-              projects
+              Projects
             </button>
           </li>
           <li className="nav-item">
             <button className="nav-links" onClick={() => scrollToSection('achievements')}>
-              achievements
+              Achievements
             </button>
           </li>
           <li className="nav-item">
             <button className="nav-links" onClick={() => scrollToSection('contact')}>
-              contact
+              Contact
             </button>
           </li>
 

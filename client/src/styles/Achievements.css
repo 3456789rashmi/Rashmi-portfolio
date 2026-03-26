@@ -281,6 +281,10 @@ html[data-theme="light"] .header-title .hl {
   transition: color 0.5s ease;
 }
 
+html[data-theme="dark"] .header-sub {
+  color: #e2e8f0;
+}
+
 html[data-theme="light"] .header-sub {
   color: #000000;
 }
@@ -319,6 +323,10 @@ html[data-theme="light"] .stat-num {
   color: #000000;
   margin-top: 0.25rem;
   transition: color 0.5s ease;
+}
+
+html[data-theme="dark"] .stat-label {
+  color: #cbd5e1;
 }
 
 html[data-theme="light"] .stat-label {
@@ -739,6 +747,11 @@ html[data-theme="dark"] .card-org {
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+html[data-theme="dark"] .modal {
+  background: rgba(30, 41, 59, 0.95);
+  box-shadow: 0 40px 100px rgba(30, 58, 138, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
 .modal-overlay.open .modal {
   transform: translateY(0) scale(1);
 }
@@ -844,6 +857,10 @@ html[data-theme="dark"] .card-org {
   animation: fade-up 0.4s ease 0.36s both;
 }
 
+html[data-theme="dark"] .modal-desc {
+  color: #e2e8f0;
+}
+
 .modal-tags {
   display: flex;
   flex-wrap: wrap;
@@ -940,6 +957,13 @@ html[data-theme="dark"] .card-org {
   letter-spacing: 0.06em;
   animation: ribbon-in 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s both;
   white-space: nowrap;
+}
+
+html[data-theme="dark"] .ribbon-bar {
+  background: rgba(30, 41, 59, 0.85);
+  border-color: rgba(59, 130, 246, 0.25);
+  color: #cbd5e1;
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.25);
 }
 
 @keyframes ribbon-in {

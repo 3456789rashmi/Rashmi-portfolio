@@ -85,7 +85,7 @@ html[data-theme="light"] .navbar {
   position: relative;
   letter-spacing: 0.01em;
   cursor: pointer;
-  text-transform: lowercase;
+  text-transform: none;
   font-family: inherit;
 }
 
