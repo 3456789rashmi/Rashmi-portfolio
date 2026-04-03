@@ -13,8 +13,10 @@ const Hero = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [scrollTilt, setScrollTilt] = useState({ x: 0, y: 0 });
   const [particles, setParticles] = useState([]);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const cardRef = useRef(null);
   const nameRef = useRef(null);
+  const imageRef = useRef(null);
   const autoExpandTimerRef = useRef(null);
   const autoCollapseTimerRef = useRef(null);
   
@@ -64,6 +66,8 @@ const Hero = () => {
         if (cardRef.current) {
           cardRef.current.classList.remove('rotating');
           cardRef.current.classList.add('loaded');
+          // Trigger image animation after card loads
+          setImageLoaded(true);
         }
       }, 1500); // Match animation duration
       
@@ -327,7 +331,13 @@ const Hero = () => {
                   setIsExpanded(false);
                   setIsHovering(false);
                 }}>
-                  <img src={RashmiImage} alt="Rashmi Sharma" className="profile-image-card" />
+                  <img 
+                    ref={imageRef}
+                    src={RashmiImage} 
+                    alt="Rashmi Sharma" 
+                    className={`profile-image-card ${imageLoaded ? 'loaded' : ''}`}
+                    onLoad={() => setImageLoaded(true)}
+                  />
                 </div>
               </div>
             )}
